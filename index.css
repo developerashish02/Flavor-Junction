@@ -45,7 +45,8 @@ input[type="search"] {
     /* background-color: #f2f2f2; */
     font-size: 16px;
     box-shadow: 0px 0px 5px #ccc;
-    width: 300px;
+    width: 400px;
+    outline: none;
 }
 
 input[type="search"]::placeholder {
@@ -60,7 +61,7 @@ input[type="search"]::placeholder {
 }
 
 .card__container {
-    height: 400px;
+    height: auto;
     width: 350px;
     margin-top: 25px;
     padding: 10px;
@@ -164,4 +165,19 @@ input[type="search"]::placeholder {
     background-color: #ddd;
     border-color: #aaa;
     color: #fff;
+}
+
+.food__search {
+    display: flex;
+    justify-content: center;
+}
+
+.food__search>button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #FF7E8B;
+    color: white;
+    box-shadow: 0 0 5px #FF7E8B;
+    font-size: 16px;
 }
