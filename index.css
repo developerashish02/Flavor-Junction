@@ -181,3 +181,14 @@ input[type="search"]::placeholder {
     box-shadow: 0 0 5px #FF7E8B;
     font-size: 16px;
 }
+
+.error-message {
+    background-color: white;
+    border: 1px solid #f5c6cb;
+    color: rgb(156, 156, 156);
+    margin: 20px;
+    padding: 20px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center;
+}

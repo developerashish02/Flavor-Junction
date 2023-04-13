@@ -2,7 +2,6 @@ import { CARD__background } from "../config/constants";
 
 const FoodCard = (props) => {
     const { address, deliveryTime, avgRating, costForTwoString, cuisines, name, cloudinaryImageId } = props.resData.data;
-    console.log(props, "data")
     return (
         <div className="card__container">
             <div className="food__img">
