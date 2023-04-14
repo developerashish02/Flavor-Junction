@@ -192,3 +192,13 @@ input[type="search"]::placeholder {
     line-height: 1.5;
     text-align: center;
 }
+
+.card__text {
+    border: 2px solid red;
+    font-size: 12px;
+    width: 40px;
+}
+
+.food__text {
+    margin: 10px 0;
+}

@@ -3,64 +3,71 @@ import { useState, useEffect } from "react";
 import { RESTAURANTS_API } from "../config/constants";
 import Shimmer from "../UI/Shimmer";
 
+const ErrorComponent = () => {
+	return (
+		<div className="error-message">
+			<h2>No restaurants or results found</h2>
+			<p>Please try again with different search criteria.</p>
+		</div>
+	);
+};
+
 const Body = () => {
-    const [restaurant, setRestaurant] = useState([]);
-    const [searchText, setSarchText] = useState("");
-    const [filterRestaurant, setFilterRestaurant] = useState([]);
+	// states
+	const [restaurant, setRestaurant] = useState([]);
+	const [searchText, setSarchText] = useState("");
+	const [filterRestaurant, setFilterRestaurant] = useState([]);
 
-    console.log("state chnages..");
+	// use effects
+	useEffect(() => {
+		fetchRestaurantData();
+	}, []);
 
-    useEffect(() => {
-        fetchRestaurantData();
-    }, []);
+	// handlers
+	// fetch restaurant data
+	async function fetchRestaurantData() {
+		try {
+			const response = await fetch(RESTAURANTS_API);
+			const data = await response.json();
+			const cards = data?.data?.cards[2]?.data?.data?.cards;
+			setRestaurant(cards);
+			setFilterRestaurant(cards);
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		}
+	}
+	// filter search
+	async function handleSearch() {
+		const filter = restaurant.filter((res) =>
+			res?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
+		);
+		setFilterRestaurant(filter);
+	}
 
-    async function fetchRestaurantData() {
-        try {
-            const response = await fetch(RESTAURANTS_API);
-            const data = await response.json();
-            setRestaurant(data?.data?.cards[2]?.data?.data?.cards);
-            setFilterRestaurant(data?.data?.cards[2]?.data?.data?.cards);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
+	return (
+		<>
+			<div className="food__search">
+				<input
+					type="search"
+					placeholder="search for restaurant , cusine or a dish"
+					onChange={(e) => setSarchText(e.target.value)}
+				/>
+				<button onClick={handleSearch}>Search</button>
+			</div>
 
-    async function handleSearch() {
-        const filter = restaurant.filter((res) =>
-            res?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
-        );
-        setFilterRestaurant(filter);
-    }
+			<div id="card__container">
+				{restaurant.length === 0 && <Shimmer /> || filterRestaurant.map((restaurant) => (
+					<FoodCard resData={restaurant} />
+				))}
 
-    return (
-        <>
-            <div className="food__search">
-                <input
-                    type="search"
-                    placeholder="search for restaurant , cusine or a dish"
-                    onChange={(e) => setSarchText(e.target.value)}
-                />
-                <button onClick={handleSearch}>Search</button>
-            </div>
+				{restaurant.length !== 0 && filterRestaurant.length === 0 && <div className="error-message">
+					<h2>No restaurants or results found</h2>
+					<p>Please try again with different search criteria.</p>
+				</div>}
 
-            {restaurant.length !== 0 ? (
-                <div id="card__container">
-                    {filterRestaurant.length !== 0 ? (
-                        filterRestaurant.map((restaurant) => (
-                            <FoodCard resData={restaurant} />
-                        ))
-                    ) : (
-                        <div className="error-message">
-                            <h2>No restaurants or results found</h2>
-                            <p>Please try again with different search criteria.</p>
-                        </div>
-                    )}
-                </div>
-            ) : (
-                <Shimmer />
-            )}
-        </>
-    );
+			</div>
+		</>
+	);
 };
 
 export default Body;
