@@ -1,18 +1,27 @@
 import { useState } from "react";
-import { CARD__background } from "../config/constants";
-import Skeleton from 'react-loading-skeleton'
+import { CARD__background } from "./utils/constants";
 
 const FoodCard = (props) => {
-    const { address, deliveryTime, avgRating, costForTwoString, cuisines, name, cloudinaryImageId } = props.resData.data;
+    const {
+        address,
+        deliveryTime,
+        avgRating,
+        costForTwoString,
+        cuisines,
+        name,
+        cloudinaryImageId,
+    } = props.resData.data;
 
     const [loading, setLoding] = useState(true);
 
-    console.log("Cards...")
+    console.log("Cards...");
 
     return (
         <div className="card__container">
             <div className="food__img">
-                <img src={CARD__background + cloudinaryImageId || <Skeleton width={400} />} />
+                <img
+                    src={CARD__background + cloudinaryImageId || <Skeleton width={400} />}
+                />
 
                 <div className="food__offers">
                     <p className="title__offer">Free Burger 50% discoutn</p>
@@ -38,7 +47,7 @@ const FoodCard = (props) => {
             </div>
         </div>
         // </div>
-    )
-}
+    );
+};
 
-export default FoodCard; 
+export default FoodCard;

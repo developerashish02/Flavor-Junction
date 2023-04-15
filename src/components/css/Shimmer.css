@@ -1,0 +1,7 @@
+.shimmer__card {
+    border: 1px solid black;
+    background-color: lightgray;
+    height: 250px;
+    width: 350px;
+    margin-top: 20px
+}

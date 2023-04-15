@@ -1,7 +1,7 @@
 import FoodCard from "./FoodCard";
 import { useState, useEffect } from "react";
-import { RESTAURANTS_API } from "../config/constants";
-import Shimmer from "../UI/Shimmer";
+import { RESTAURANTS_API } from "./utils/constants";
+import Shimmer from "./UI/Shimmer";
 
 const ErrorComponent = () => {
 	return (
@@ -64,7 +64,6 @@ const Body = () => {
 					<h2>No restaurants or results found</h2>
 					<p>Please try again with different search criteria.</p>
 				</div>}
-
 			</div>
 		</>
 	);
