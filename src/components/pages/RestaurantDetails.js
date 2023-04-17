@@ -28,7 +28,6 @@ const RestaurantDetail = () => {
             <h1> {name} </h1>
             <h2> {locality} </h2>
             <h3> {avgRating} </h3>
-
             <p> {cuisines?.join(",")} </p>
         </div>
     );
