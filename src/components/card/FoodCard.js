@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CARD__background } from "./utils/constants";
+import { CARD__background } from "../utils/constants";
 
 const FoodCard = (props) => {
     const {

@@ -203,3 +203,10 @@ input[type="search"]::placeholder {
 .food__text {
     margin: 10px 0;
 }
+
+
+.restaurant_img {
+    height: 300px;
+    width: 300px;
+    object-fit: Cover;
+}

@@ -1,16 +1,8 @@
-import FoodCard from "./FoodCard";
+import FoodCard from "../components/card/FoodCard";
 import { useState, useEffect } from "react";
 import { RESTAURANTS_API } from "./utils/constants";
 import Shimmer from "./UI/Shimmer";
-
-const ErrorComponent = () => {
-	return (
-		<div className="error-message">
-			<h2>No restaurants or results found</h2>
-			<p>Please try again with different search criteria.</p>
-		</div>
-	);
-};
+import { Link } from "react-router-dom";
 
 const Body = () => {
 	// states
@@ -56,14 +48,22 @@ const Body = () => {
 			</div>
 
 			<div id="card__container">
-				{restaurant.length === 0 && <Shimmer /> || filterRestaurant.map((restaurant) => (
-					<FoodCard resData={restaurant} />
-				))}
+				{(restaurant.length === 0 && <Shimmer />) ||
+					filterRestaurant.map((restaurant) => (
+						<Link
+							to={"/restaurant/" + restaurant.data.id}
+							key={restaurant.data.id}
+						>
+							<FoodCard resData={restaurant} />
+						</Link>
+					))}
 
-				{restaurant.length !== 0 && filterRestaurant.length === 0 && <div className="error-message">
-					<h2>No restaurants or results found</h2>
-					<p>Please try again with different search criteria.</p>
-				</div>}
+				{restaurant.length !== 0 && filterRestaurant.length === 0 && (
+					<div className="error-message">
+						<h2>No restaurants or results found</h2>
+						<p>Please try again with different search criteria.</p>
+					</div>
+				)}
 			</div>
 		</>
 	);

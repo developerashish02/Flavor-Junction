@@ -4,7 +4,10 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import AboutPage from "./components/pages/AboutPage";
-import RestaurantDetail from "./components/RestaurantDetails";
+import RestaurantDetail from "./components/pages/RestaurantDetails";
+import ErrorPage from "./components/pages/ErrorPage";
+import SignUpPage from "./components/pages/SignUpPage";
+
 
 const App = () => {
     return (
@@ -19,6 +22,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/about",
@@ -32,6 +36,10 @@ const router = createBrowserRouter([
                 path: "/restaurant/:restaurantId",
                 element: <RestaurantDetail />,
             },
+            {
+                path: "/sign-up",
+                element: <SignUpPage />
+            }
         ],
     },
 ]);
